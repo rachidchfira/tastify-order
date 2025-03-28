@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCart } from "@/context/CartContext";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
 
 // Menu Categories & Items
 const categories = ["Popular", "Main Dishes", "Appetizers", "Drinks"];
