@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,138 +13,155 @@ import Footer from "@/components/Footer";
 const menuItemsData = [
   {
     id: "p1",
-    name: "Pho Bo",
-    description: "Traditional Vietnamese beef noodle soup with herbs and lime",
-    price: 85000,
-    image: "https://images.unsplash.com/photo-1576577445504-6af96477db52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Lamb Tagine",
+    description: "Slow-cooked lamb with prunes, almonds, and aromatic spices served with couscous",
+    price: 185000,
+    image: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Main Dishes",
     badge: "Best Seller"
   },
   {
     id: "p2",
-    name: "Banh Mi Thit",
-    description: "Vietnamese sandwich with grilled pork, pickled vegetables, and pâté",
-    price: 65000,
-    image: "https://images.unsplash.com/photo-1600454309261-3dc9b7597637?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Sandwiches",
+    name: "Chicken Pastilla",
+    description: "Sweet and savory pie with spiced chicken, almonds, and cinnamon in crispy phyllo dough",
+    price: 165000,
+    image: "https://images.unsplash.com/photo-1577906096429-f73c2c312435?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Main Dishes",
     badge: "Popular"
   },
   {
     id: "p3",
-    name: "Bun Cha",
-    description: "Grilled pork with rice vermicelli, herbs and dipping sauce",
-    price: 75000,
-    image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Noodles",
+    name: "Couscous Royale",
+    description: "Steamed couscous with lamb, chicken, merguez sausage, and seasonal vegetables",
+    price: 175000,
+    image: "https://images.unsplash.com/photo-1536489885071-87983c3e2859?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Main Dishes",
   },
   {
     id: "p4",
-    name: "Ca Phe Sua Da",
-    description: "Vietnamese iced coffee with sweetened condensed milk",
-    price: 35000,
-    image: "https://images.unsplash.com/photo-1544788978-c0d118afa40b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Mint Tea",
+    description: "Traditional Moroccan mint tea with fresh mint leaves and sugar",
+    price: 45000,
+    image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Drinks",
     badge: "Favorite"
   },
   {
     id: "m1",
-    name: "Com Tam Suon",
-    description: "Broken rice with grilled pork chop, fried egg and vegetables",
-    price: 80000,
-    image: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Rice Dishes",
+    name: "Beef Kefta Tagine",
+    description: "Spiced meatballs in rich tomato sauce with eggs, served with fresh bread",
+    price: 160000,
+    image: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Main Dishes",
   },
   {
     id: "m2",
-    name: "Bun Bo Hue",
-    description: "Spicy beef noodle soup from central Vietnam",
-    price: 90000,
-    image: "https://images.unsplash.com/photo-1614080262560-9feff9de8185?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Noodles",
+    name: "Fish Chermoula",
+    description: "Grilled fish marinated in chermoula sauce with lemon and fresh herbs",
+    price: 190000,
+    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Seafood",
     badge: "Spicy"
   },
   {
     id: "m3",
-    name: "Ca Kho To",
-    description: "Caramelized fish in clay pot with vegetables and rice",
-    price: 95000,
-    image: "https://images.unsplash.com/photo-1518983546435-47245aaa6cc3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Seafood",
+    name: "Vegetable Tagine",
+    description: "Slow-cooked seasonal vegetables with preserved lemon and olives",
+    price: 145000,
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Vegetarian",
   },
   {
     id: "m4",
-    name: "Bo Luc Lac",
-    description: "Shaking beef with bell peppers and onions",
-    price: 110000,
-    image: "https://images.unsplash.com/photo-1545114687-d2acd3da74b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Beef",
+    name: "Mechoui",
+    description: "Slow-roasted lamb shoulder with cumin, paprika, and garlic",
+    price: 210000,
+    image: "https://images.unsplash.com/photo-1514516345957-556ca7c90a64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Main Dishes",
     badge: "New"
   },
   {
     id: "a1",
-    name: "Goi Cuon",
-    description: "Fresh spring rolls with shrimp, pork, herbs and peanut sauce",
-    price: 55000,
-    image: "https://images.unsplash.com/photo-1503764654157-72d979d9af2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Zaalouk",
+    description: "Smoky eggplant and tomato salad with garlic, cumin, and olive oil",
+    price: 75000,
+    image: "https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Appetizers",
   },
   {
     id: "a2",
-    name: "Cha Gio",
-    description: "Crispy fried spring rolls with dipping sauce",
-    price: 60000,
-    image: "https://images.unsplash.com/photo-1544795381-58119c606ff3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Moroccan Briouats",
+    description: "Crispy pastry triangles filled with spiced meat or cheese",
+    price: 80000,
+    image: "https://images.unsplash.com/photo-1541086095944-f4b5412d3666?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Appetizers",
   },
   {
     id: "a3",
-    name: "Goi Ngo Sen",
-    description: "Lotus root salad with shrimp, pork and herbs",
+    name: "Moroccan Salad",
+    description: "Fresh tomatoes, cucumbers, onions with herbs and olive oil dressing",
     price: 65000,
-    image: "https://images.unsplash.com/photo-1538133251510-8acca97b019f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Salads",
   },
   {
     id: "a4",
-    name: "Banh Xeo",
-    description: "Crispy Vietnamese pancake with bean sprouts and herbs",
+    name: "Harira Soup",
+    description: "Traditional Moroccan soup with tomatoes, lentils, chickpeas, and fragrant spices",
     price: 70000,
-    image: "https://images.unsplash.com/photo-1606458000899-17185e4326ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
-    category: "Appetizers",
+    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Soups",
     badge: "Favorite"
   },
   {
     id: "d1",
-    name: "Ca Phe Sua Da",
-    description: "Vietnamese iced coffee with sweetened condensed milk",
-    price: 35000,
-    image: "https://images.unsplash.com/photo-1544788978-c0d118afa40b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Moroccan Mint Tea",
+    description: "Traditional tea with fresh mint leaves and sugar",
+    price: 45000,
+    image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Drinks",
   },
   {
     id: "d2",
-    name: "Sinh To Bo",
-    description: "Fresh avocado smoothie with condensed milk",
-    price: 45000,
-    image: "https://images.unsplash.com/photo-1590080875238-5a2952653ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Orange Blossom Water",
+    description: "Refreshing drink with orange blossom water and honey",
+    price: 50000,
+    image: "https://images.unsplash.com/photo-1556679343-c1306ee5277b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Drinks",
   },
   {
     id: "d3",
-    name: "Nuoc Mia",
-    description: "Fresh sugarcane juice with kumquat",
-    price: 30000,
-    image: "https://images.unsplash.com/photo-1578577338344-3cc3dce7f1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Avocado Smoothie",
+    description: "Creamy avocado smoothie with milk, honey, and dates",
+    price: 60000,
+    image: "https://images.unsplash.com/photo-1590080875238-5a2952653ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Drinks",
     badge: "Refreshing"
   },
   {
     id: "d4",
-    name: "Tra Da",
-    description: "Vietnamese iced tea",
-    price: 25000,
-    image: "https://images.unsplash.com/photo-1541119257206-a9cf4353d655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    name: "Moroccan Coffee",
+    description: "Strong coffee flavored with cardamom and cinnamon",
+    price: 55000,
+    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
     category: "Drinks",
+  },
+  {
+    id: "de1",
+    name: "Moroccan Pastries",
+    description: "Assortment of traditional Moroccan pastries with almonds and honey",
+    price: 85000,
+    image: "https://images.unsplash.com/photo-1603137071762-2760f0c5bf5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Desserts",
+    badge: "Popular"
+  },
+  {
+    id: "de2",
+    name: "Orange Blossom Cake",
+    description: "Moist semolina cake with orange blossom water and almonds",
+    price: 65000,
+    image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80",
+    category: "Desserts",
   }
 ];
 
@@ -201,9 +219,9 @@ export default function Menu() {
       <section className="py-12 bg-brand-cream">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-brand-dark mb-4">Explore Our Full Menu</h2>
+            <h2 className="text-3xl font-bold text-brand-dark mb-4">Explore Our Moroccan Menu</h2>
             <p className="text-lg text-gray-600">
-              Browse our delicious Vietnamese dishes and find your new favorite.
+              Browse our authentic Moroccan dishes prepared with traditional spices and techniques.
             </p>
           </div>
 
