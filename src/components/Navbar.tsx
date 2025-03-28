@@ -22,23 +22,23 @@ export default function Navbar() {
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
   
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md py-2" : "bg-gradient-to-r from-brand-red/90 to-brand-orange/90 py-4"}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md py-2`}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <h1 className={`text-2xl font-bold ${isScrolled ? "text-brand-red" : "text-white"}`}>
+          <h1 className="text-2xl font-bold text-brand-red">
             TastyBowl
           </h1>
         </Link>
         
         <nav className="hidden md:flex items-center space-x-8">
-          <NavLinks isScrolled={isScrolled} />
+          <NavLinks />
         </nav>
         
         <div className="flex items-center gap-3">
           <Link to="/cart">
             <Button 
               variant="ghost" 
-              className={`p-2 relative ${isScrolled ? "text-brand-dark hover:text-brand-red" : "text-white hover:text-brand-yellow"}`}
+              className="p-2 relative text-brand-dark hover:text-brand-red"
             >
               <ShoppingCart className="h-6 w-6" />
               {totalItems > 0 && (
@@ -52,7 +52,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <Button 
               variant="ghost" 
-              className={`p-2 ${isScrolled ? "text-brand-dark hover:text-brand-red" : "text-white hover:text-brand-yellow"}`}
+              className="p-2 text-brand-dark hover:text-brand-red"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -88,10 +88,10 @@ export default function Navbar() {
   );
 }
 
-const NavLinks = ({ isScrolled = true, isMobile = false }) => {
+const NavLinks = ({ isMobile = false }) => {
   const linkClass = isMobile
     ? "text-brand-dark hover:text-brand-red font-medium"
-    : `${isScrolled ? "text-brand-dark" : "text-white"} hover:text-brand-yellow font-medium transition-colors`;
+    : "text-brand-dark hover:text-brand-red font-medium transition-colors";
     
   return (
     <>
