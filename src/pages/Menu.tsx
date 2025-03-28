@@ -216,7 +216,7 @@ export default function Menu() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <section className="py-12 bg-brand-cream">
+      <section className="py-12 bg-brand-cream pt-24">  {/* Added pt-24 to create more space from navbar */}
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-brand-dark mb-4">Explore Our Moroccan Menu</h2>
