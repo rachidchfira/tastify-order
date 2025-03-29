@@ -7,3 +7,14 @@
 .hero-overlay {
   @apply absolute inset-0 bg-black/50 z-10;
 }
+
+/* Animation for notification popup */
+@keyframes notification-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.notification-pulse {
+  animation: notification-pulse 1s ease-in-out;
+}

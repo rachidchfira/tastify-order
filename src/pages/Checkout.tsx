@@ -6,17 +6,28 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
+import NotificationService from "@/services/NotificationService";
 
 export default function Checkout() {
   const { items, getTotalPrice, clearCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [isProcessing, setIsProcessing] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    district: "",
+    city: "Ho Chi Minh City",
+    notes: ""
+  });
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -26,6 +37,14 @@ export default function Checkout() {
       currency: 'VND',
       maximumFractionDigits: 0
     }).format(price);
+  };
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
   };
   
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,6 +58,23 @@ export default function Checkout() {
     // Process cash on delivery order
     setIsProcessing(true);
     
+    // Generate a random order ID
+    const orderId = `ORD-${Math.floor(Math.random() * 1000000)}`;
+    
+    // Extract customer name and prepare items list for notification
+    const customerName = `${formData.firstName} ${formData.lastName}`;
+    const itemsList = items.map(item => item.name);
+    const totalAmount = getTotalPrice() + 15000;
+    
+    // Send notification to boss
+    NotificationService.getInstance().sendOrderNotification(
+      orderId,
+      customerName,
+      totalAmount,
+      itemsList,
+      paymentMethod
+    );
+    
     // Simulate API call
     setTimeout(() => {
       setIsProcessing(false);
@@ -50,6 +86,33 @@ export default function Checkout() {
       });
       navigate("/order-confirmation");
     }, 2000);
+  };
+  
+  const handleQRPaymentComplete = () => {
+    // Generate a random order ID
+    const orderId = `ORD-${Math.floor(Math.random() * 1000000)}`;
+    
+    // Extract customer name and prepare items list for notification
+    const customerName = `${formData.firstName} ${formData.lastName}`;
+    const itemsList = items.map(item => item.name);
+    const totalAmount = getTotalPrice() + 15000;
+    
+    // Send notification to boss
+    NotificationService.getInstance().sendOrderNotification(
+      orderId,
+      customerName,
+      totalAmount,
+      itemsList,
+      'bank'
+    );
+    
+    clearCart();
+    toast({
+      title: "Payment Received!",
+      description: "Your order has been placed successfully. You will receive a confirmation shortly.",
+      duration: 5000,
+    });
+    navigate("/order-confirmation");
   };
   
   if (items.length === 0) {
@@ -90,15 +153,7 @@ export default function Checkout() {
                     </Button>
                     <Button 
                       className="bg-brand-red hover:bg-red-700 text-white" 
-                      onClick={() => {
-                        clearCart();
-                        toast({
-                          title: "Payment Received!",
-                          description: "Your order has been placed successfully. You will receive a confirmation shortly.",
-                          duration: 5000,
-                        });
-                        navigate("/order-confirmation");
-                      }}
+                      onClick={handleQRPaymentComplete}
                     >
                       I've Completed Payment
                     </Button>
@@ -113,35 +168,83 @@ export default function Checkout() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                       <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" required placeholder="First Name" />
+                      <Input 
+                        id="firstName" 
+                        required 
+                        placeholder="First Name" 
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" required placeholder="Last Name" />
+                      <Input 
+                        id="lastName" 
+                        required 
+                        placeholder="Last Name" 
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" required placeholder="Email" />
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        required 
+                        placeholder="Email" 
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone</Label>
-                      <Input id="phone" required placeholder="Phone Number" />
+                      <Input 
+                        id="phone" 
+                        required 
+                        placeholder="Phone Number" 
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div className="md:col-span-2">
                       <Label htmlFor="address">Address</Label>
-                      <Input id="address" required placeholder="Street Address" />
+                      <Input 
+                        id="address" 
+                        required 
+                        placeholder="Street Address" 
+                        value={formData.address}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="district">District</Label>
-                      <Input id="district" required placeholder="District" />
+                      <Input 
+                        id="district" 
+                        required 
+                        placeholder="District" 
+                        value={formData.district}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="city">City</Label>
-                      <Input id="city" required defaultValue="Ho Chi Minh City" />
+                      <Input 
+                        id="city" 
+                        required 
+                        defaultValue="Ho Chi Minh City" 
+                        value={formData.city}
+                        onChange={handleInputChange}
+                      />
                     </div>
                     <div className="md:col-span-2">
                       <Label htmlFor="notes">Delivery Notes (Optional)</Label>
-                      <Textarea id="notes" placeholder="Any special instructions for delivery" />
+                      <Textarea 
+                        id="notes" 
+                        placeholder="Any special instructions for delivery" 
+                        value={formData.notes}
+                        onChange={handleInputChange}
+                      />
                     </div>
                   </div>
                   
