@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
@@ -19,13 +18,9 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+    name: "",
     phone: "",
     address: "",
-    district: "",
-    city: "Ho Chi Minh City",
     notes: ""
   });
   const navigate = useNavigate();
@@ -62,7 +57,7 @@ export default function Checkout() {
     const orderId = `ORD-${Math.floor(Math.random() * 1000000)}`;
     
     // Extract customer name and prepare items list for notification
-    const customerName = `${formData.firstName} ${formData.lastName}`;
+    const customerName = formData.name;
     const itemsList = items.map(item => item.name);
     const totalAmount = getTotalPrice() + 15000;
     
@@ -93,7 +88,7 @@ export default function Checkout() {
     const orderId = `ORD-${Math.floor(Math.random() * 1000000)}`;
     
     // Extract customer name and prepare items list for notification
-    const customerName = `${formData.firstName} ${formData.lastName}`;
+    const customerName = formData.name;
     const itemsList = items.map(item => item.name);
     const totalAmount = getTotalPrice() + 15000;
     
@@ -165,35 +160,14 @@ export default function Checkout() {
                 <h2 className="text-xl font-bold mb-6">Delivery Information</h2>
                 
                 <form onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="space-y-6 mb-6">
                     <div>
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="name">Full Name</Label>
                       <Input 
-                        id="firstName" 
+                        id="name" 
                         required 
-                        placeholder="First Name" 
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input 
-                        id="lastName" 
-                        required 
-                        placeholder="Last Name" 
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        required 
-                        placeholder="Email" 
-                        value={formData.email}
+                        placeholder="Your full name" 
+                        value={formData.name}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -207,37 +181,17 @@ export default function Checkout() {
                         onChange={handleInputChange}
                       />
                     </div>
-                    <div className="md:col-span-2">
-                      <Label htmlFor="address">Address</Label>
+                    <div>
+                      <Label htmlFor="address">Delivery Address</Label>
                       <Input 
                         id="address" 
                         required 
-                        placeholder="Street Address" 
+                        placeholder="Your complete address" 
                         value={formData.address}
                         onChange={handleInputChange}
                       />
                     </div>
                     <div>
-                      <Label htmlFor="district">District</Label>
-                      <Input 
-                        id="district" 
-                        required 
-                        placeholder="District" 
-                        value={formData.district}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="city">City</Label>
-                      <Input 
-                        id="city" 
-                        required 
-                        defaultValue="Ho Chi Minh City" 
-                        value={formData.city}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="md:col-span-2">
                       <Label htmlFor="notes">Delivery Notes (Optional)</Label>
                       <Textarea 
                         id="notes" 
